@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ product.name }} 
+  {% with page=1 %}
+   {{ block.super }}
+ {% endwith %}
+ 
+{% endblock %}
+
+{% block content %} 
+<div id="productapp">
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <img src="{{product.image.url}}" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">Category 2</span>
+              </a>
+              <a href="">
+                <span class="badge blue mr-1">New</span>
+              </a>
+              <a href="">
+                <span class="badge red mr-1">Bestseller</span>
+              </a>
+            </div>
+            <div class="product-detail">
+              <div class="product-name" style="font-size: 20px; font-weight: bold;">
+                <span>{{product.name}}</span>
+              </div>
+              <div class="product-publisher" >
+                <a href=""><span>{{product.publisher.name}}</span></a>
+              </div>
+              
+            </div>
+            <p class="lead product-price">
+              {% if product.discount > 0 %}
+                <span>{{ price_discount }}</span>
+                <span class="mr-1">
+                  <del>{{ product.price_sell }}</del>
+                </span>
+              {% else %}
+                <span>{{ product.price_sell }}</span>
+              {% endif %}
+            </p>
+            <div class="expected-delivery">
+              <div class="expected-delivery-address">
+                <span style="margin-right: 30px;">
+                  Thời gian giao hàng
+                </span>
+                <span>
+                  Địa điểm giao hàng
+                </span>
+              </div>
+            </div>
+            <div class="expected-return-product-policy">
+              <span style="margin-right: 42px;">
+                Chính sách đổi trả
+              </span>
+              <span>
+                Đổi trả sản phẩm trong 30 ngày
+              </span>
+            </div>
+            <div class="cart pt-2">
+              <!-- Default input -->
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px; float: left;">
+              <button class="btn btn-outline-primary" @click="addToCart({{ product.id }})" style="float: left; margin-left: 20px;">Add to cart
+                
+              </button>
+              <p>{{ name }}</p>
+            </div>
+              
+           
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      <!--Grid row-->
+      <div class="product-info" style="background-color: white;">
+        <div class="product-view" style="padding: 20px">
+          <div style="font-weight: bold; font-size: 20px;">
+            Thông tin sản phẩm
+          </div>
+          <div class="product-grid-view mt-2">
+            <table>
+              <tr>
+                <td style="width: 300px">
+                  Mã sản phẩm
+                </td>
+                <td>
+                  {{ product.code }}
+                </td>
+              </tr>
+              <tr>
+                <td>Tên sản phẩm</td>
+                <td>{{ product.name }}</td>
+              </tr>
+              <tr>
+                <td>Tên nhà xuất bản</td>
+                <td>{{ product.publisher }}</td>
+              </tr>
+            </table>
+          </div>
+          <hr>
+          <div class="product-description mt-2">
+            <div class="name-product">
+              {{ product.name }}
+            </div>
+            <div class="discription">
+              {{ product.discription }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">Additional information</h4>
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
+            voluptates,
+            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+  var productapp = new Vue({
+      el: '#productapp',
+      delimeters: ['[[', ']]'],
+      store: store,
+      data () {
+          return {
+              
+          }
+      },
+      mounted() {
+          console.log('Mounted');
+      },
+      methods: {
+          changeMainImage(image) {
+              this.mainImage = image;
+          },
+          addToCart(product_id) {
+              console.log('Product_id:', product_id);
+
+              var data = {
+                  'product_id': product_id, 
+                  'update': false,
+                  'quantity': 1
+              };
+                  
+              fetch('/api/add_to_cart/', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRFToken': '{{ csrf_token }}'
+                  },
+                  credentials: 'same-origin',
+                  body: JSON.stringify(data)
+              })
+              .then((response) => {
+                  console.log(response)   
+                  store.commit('increment', 1);       
+              })
+              .catch(function (error) {
+                  console.log('Error 2');
+                  console.log(error);
+              })
+          }
+      }
+    });
+  </script>
+{% endblock %}

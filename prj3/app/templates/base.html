@@ -1,0 +1,180 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/vendors/jquery.min.js"></script>
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js"></script>
+
+</head>
+
+{% block header %}
+<div class="wrapper">
+    <div class="header">
+        <div class="header-top">
+            <div class="navbar-wrapper navbar-default" role="navigation">
+                <div class="container clearfix navbar-default">
+                    <div class="main-box">
+                        <div class="row">
+                            <div class="left-header clearfix">
+                                <ul class="left">
+                                    <li class=""> 
+                                        <a href="">
+                                            <i class="fa fa-info-circle"></i>
+                                            Trợ giúp
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="">
+                                            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                                            Tin tức
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="">
+                                            <i class="fa fa-tags"></i>
+                                            Khuyến mãi
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="right-header clearfix">
+                                <ul class="right">
+                                    <li class="">
+                                        <a href="">
+                                            <i class="fa fa-gift"></i>
+                                            Ưu đãi và tiện ích
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="">
+                                            <i class="fa fa-shopping-bag"></i>
+                                            Kiểm tra đơn hàng
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="">
+                                            <i class="fa fa-sign-in"></i>
+                                            Đăng nhập
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="">
+                                            <i class="fa fa-user-plus"></i>
+                                            Đăng ký
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> 
+                    </div>
+                      
+                </div>
+            </div>     
+        </div>
+        <div class="logo clearfix">
+            <div class="container clearfix">
+                <div class="logo-left col-md-2">
+                    <a href="/">
+                        <img src="https://bookbuy.vn/Images/frontend/base/logo-new.png" alt="">
+                    </a>
+                </div>
+                <div class="search-box col-md-6">
+                    
+                        <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off">
+                        <span class="button-search fa fa-search">
+                        </span>
+                    
+                </div>
+                <div class="contact col-md-4">
+                    <div class="hotline col-md-7">
+                        <i class="ic fa fa-headphones fa-2x"></i>
+                        <span>
+                            <p>0933 109 009</p>
+                            <p style="color: #333;font-size: 15px;">Hot line</p>
+                        </span>
+                    </div>
+                    <div class="cart col-md-52" id="navbarapp" >
+                        <a href="{% url 'cart' %}">
+                            <i class="fa fa-shopping-cart fa-2x"></i>
+                            <span>([[ numItems ]])</span>
+                        </a>              
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <div class="main-content clearfix">
+        {% block content %}
+    {% endblock %}  
+
+    </div>
+    {% block footer %}
+    <div class="footer container pt-5">
+        <div class="name">
+            <h4>NHÀ SÁCH TRỰC TUYẾN BOOKBUY.VN</h4>
+        </div>
+        <div class="content">
+            
+        Mua sách online tại nhà sách trực tuyến Bookbuy.vn để được cập nhật nhanh nhất các tựa sách đủ thể loại với mức giảm 15 – 35% cùng nhiều ưu đãi, quà tặng kèm. Qua nhiều năm, không chỉ là địa chỉ tin cậy để bạn mua sách trực tuyến, Bookbuy còn có quà tặng, văn phòng phẩm, vật dụng gia đình,…với chất lượng đảm bảo, chủng loại đa dạng, chế độ bảo hành đầy đủ và giá cả hợp lý từ hàng trăm thương hiệu uy tín trong và ngoài nước. Đặc biệt, bạn có thể chọn những mẫu sổ tay handmade hay nhiều món quà tặng sinh nhật độc đáo chỉ có tại Bookbuy.vn.
+        <br>
+        Mua sách online tại Bookbuy, bạn được tận hưởng chính sách hỗ trợ miễn phí đổi trả hàng, giao hàng nhanh – tận nơi – miễn phí*, thanh toán linh hoạt - an toàn, đặc biệt giảm thêm trên giá bán khi sử dụng BBxu giúp bạn mua sách online giá 0đ!
+        <br>
+        Chỉ với 3 cú click chuột, chưa bao giờ trải nghiệm mua sách online lại dễ chịu và nhẹ nhàng như vậy. Còn chần chờ gì nữa, đặt mua ngay những tựa sách hay cùng hàng ngàn sản phẩm chất lượng khác tại Bookbuy.vn!
+        </div>
+    </div>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.6.0/dist/vuex.js"></script>
+    <script>
+        
+        var store = new Vuex.Store({
+			state: {
+                numItems: {{ cart.get_total_length }},
+                totalCost: {{ cart.get_total_cost }},
+            },
+            mutations: {
+                increment(state, quantity) {
+                    state.numItems += quantity;
+                },
+                changeTotalCost(state, newCost){
+                    state.totalCost += newCost;
+                }
+            },
+        });
+        var navbarapp = new Vue({
+            el: '#navbarapp',
+            delimiters: ['[[', ']]'],
+            store: store,
+           
+            computed : {
+                numItems: function() {
+                    return store.state.numItems
+                }
+            }
+        })
+    </script>
+    {% block script %}
+    {% endblock %}
+</div>
+
+
+
