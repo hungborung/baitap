@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}
+    Account
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    p{
+        margin-bottom: 0px;
+    }
+</style>
+<div class="wrapper row pt-2">
+    <div class="container">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-9">
+            <h3>My Account</h3>
+            <br>
+            <h4 class="title">Account information</h4>
+            <hr>
+            <div class="contact-info row">
+                <div class="col-md-6">
+                    <h5>Thông tin liên hệ</h5>
+                    <p>Name: </strong>{{ request.user.get_full_name }}</p>
+                    <p>Email: </strong>{{ request.user.email }}</p>
+                    <span>
+                        <a href="">Edit</a> |
+                        <a href="">Change password</a>
+                    </span>
+                    
+                </div>
+                <div class="col-md-6">
+                    <h5>Newsletters</h5>
+                    <a href="">Edit</a>
+                </div>
+            </div>
+            <br>
+            <h4>Address Book</h4>
+            <hr>
+            <div class="address-book row">
+                <div class="col-md-6">
+                    <h5>Địa chỉ hóa đơn mặc định</h5>
+                    <p>{{ request.user.address }}</p>
+                    <p>{{ request.user.phone }}</p>
+                    <p>{{ request.user.zipcode }}</p>
+                    <span>
+                        <a href="">Edit</a> |
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <h5>Địa chỉ Ship hàng</h5>
+                    <p>{{ request.user.address }}</p>
+                    <p>{{ request.user.phone }}</p>
+                    <p>{{ request.user.zipcode }}</p>
+                    <span>
+                        <a href="">Edit</a> |
+                    </span>
+                </div>
+            </div>
+            <br>
+            <h4>Đơn hàng của bạn</h4>
+                <div>
+                    <p>{{ order.created_at }}</p>
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <th>Mã</th>
+                            <th>Ngày đặt</th>
+                            <th>Địa chỉ</th>
+                            <th>Tổng tiền</th>
+                            <th>Tình trạng</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            {% for order in request.user.orders.all %}
+                                {% for item in order.items.all %}
+                                    <tr>
+                                        <td>#{{ item.order.id }}</td>
+                                        <td>{{ item.order.create_at }}</td>
+                                        <td>{{ item.order.address }}</td>
+                                        <td>{{ item.order.paid_amount }}</td>
+                                        <td>
+                                            {% if item.order.status.id == 0 %} Mới {%endif%}
+                                            {% if item.order.status.id == 1 %} Đã giao hàng {%endif%}
+                                            {% if item.order.status.id == 2 %} Đã hủy {%endif%}
+                                        </td>
+                                        <td>
+                                            <span>
+                                                <a href="">Xem</a> |
+                                                <a href="">Đặt lại</a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+           
+        
+        </div>
+    </div>
+    
+    
+</div>
+
+
+{% endblock %}

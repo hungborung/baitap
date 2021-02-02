@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import *
+from django.shortcuts import redirect
+from .models import Product, Publisher, Category
 from django.views.generic.detail import DetailView
 from cart.cart import Cart
+
 
 # Create your views here.
 
@@ -13,17 +15,48 @@ priceList = [
 
 def index(request):
     product = Product.objects.filter(is_featured=True)
-
     listCategory = Category.objects.filter(cat_parent=None)
     cart = Cart(request)
-
+   
+    
     context = {
         'product' : product,
         'listCategory' : listCategory,
         'cart': cart,
+
       
     }
     return render(request, 'index.html', context)
+
+def search(request):
+    query = request.GET.get('query', '')
+    products = Product.objects.filter(name__icontains=query)
+    publisherId = request.GET.get('publisherId')
+    publisher = Publisher.objects.all()
+    publisherId = int(publisherId) if publisherId else None
+
+    if publisherId:
+        products = products.filter(publisher__id=publisherId)
+
+    priceId = request.GET.get('priceId')
+    priceId = int(priceId) if priceId else None
+    price = priceList[priceId-1] if priceId else {}
+    minPrice, maxPrice = price.get('min'), price.get('max')
+    if minPrice:
+        products = products.filter(price_sell__gte=minPrice)
+    if maxPrice:
+        products = products.filter(price_sell__lte=maxPrice)
+    context = {
+        'query': query,
+        'products': products,
+        'publisherId': publisherId,
+        'priceId': priceId,
+        'priceList': priceList,
+        'publisher' : publisher,
+    }
+
+    return render(request, 'product-page.html', context)
+
 
 def categorydetail(request, slug):
     name = request.GET.get('name', '')
@@ -46,9 +79,6 @@ def categorydetail(request, slug):
     if maxPrice:
         productList = productList.filter(price_sell__lte=maxPrice)
 
-
-    
-
     context = {
         'category': category,
         'product': product,
@@ -68,16 +98,35 @@ def productdetail(request,slug):
     cart = Cart(request)
 
     if product.discount > 0:
-        price_discount = product.price_sell * ((100-product.discount)/100)
+        priceDiscount = product.price_sell * ((100-product.discount)/100)
     else:
-        price_discount = product.price_sell
-        
+        priceDiscount = product.price_sell
+    if not product.thumbnail:
+        imagesstring = "{'image': '%s'}," % (product.image.url) 
+    else:
+        imagesstring = "{'thumbnail': '%s','image': '%s'}," % (product.thumbnail.url, product.image.url) 
+        for image in product.images.all():
+            imagesstring = imagesstring + ("{'thumbnail': '%s', 'image': '%s'}," % (image.thumbnail.url, image.image.url))
+          
+    
+    cart = Cart(request)
+
+
+    if cart.has_product(product.id):
+        product.in_cart = True
+    else:
+        product.in_cart = False
+
+
     context = {
         'product': product,
         'cart': cart,
-        'price_discount': price_discount,
+        'priceDiscount': priceDiscount,
+        'imagesstring': imagesstring,
     }
 
     return render(request, 'productdetail.html', context)
 
+def help(request):
+    return render(request, 'help.html')
 

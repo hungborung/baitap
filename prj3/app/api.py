@@ -6,7 +6,7 @@ from cart.cart import Cart
 from .models import Product  
 from django.shortcuts import get_object_or_404, redirect
 from order.utils import checkout
-from order.models import Order
+from order.models import Order, Status
 from coupon.models import Coupon
 
 def create_checkout_session(request):
@@ -35,7 +35,7 @@ def create_checkout_session(request):
         price = int(product.price_sell)
 
         if coupon_value > 0:
-            price = int(price * (int(coupon_value) / 100 )) 
+            price = int(price * (int(100-coupon_value) / 100 )) 
 
         obj = {
             'price_data': {
@@ -62,13 +62,14 @@ def create_checkout_session(request):
 
     first_name = data['first_name']
     last_name = data['last_name']
+    phone = data['phone']
     email = data['email']
     address = data['address']
     zipcode = data['zipcode']
     place = data['place']
     payment_intent = session.payment_intent
 
-    orderid = checkout(request, first_name, last_name, email, address, zipcode, place)
+    orderid = checkout(request, first_name, last_name, phone, email, address, zipcode, place)
     
     total_price = 0.00
 
@@ -78,11 +79,13 @@ def create_checkout_session(request):
 
     if coupon_value > 0:
         total_price = total_price * ((100- coupon_value) / 100)
-   
+    
+
     order = Order.objects.get(pk=orderid)
     order.payment_intent = payment_intent
     order.paid_amount = total_price
     order.paid = True
+    order.status = Status.objects.get(id=1)
     order.used_coupon = coupon_code
     order.save()
     
@@ -113,7 +116,6 @@ def api_increment_quantity(request):
     data = json.loads(request.body)
     jsonresponse = {'success': True}
     product_id = data['product_id']
-
     cart = Cart(request)
 
 def api_remove_from_cart(request):
@@ -125,30 +127,30 @@ def api_remove_from_cart(request):
     cart.remove(product_id)
     return JsonResponse(jsonresponse)
 
-def api_checkout(request):
-    cart = Cart(request)
+# def api_checkout(request):
+#     cart = Cart(request)
 
-    data = json.loads(request.body)
-    jsonresponse = {'success' : True}
-    first_name = data['first_name']
-    last_name = data['last_name']
-    email = data['email']
-    address = data['address']
-    zipcode = data['zipcode']
-    place = data['place']
+#     data = json.loads(request.body)
+#     jsonresponse = {'success' : True}
+#     first_name = data['first_name']
+#     last_name = data['last_name']
+#     phone = data['phone']
+#     email = data['email']
+#     address = data['address']
+#     zipcode = data['zipcode']
+#     place = data['place']
 
-    orderid = checkout(request, first_name, last_name, email, address, zipcode, place)
+#     orderid = checkout(request, first_name, last_name, phone, email, address, zipcode, place)
 
-    paid = True
-    if paid == True:
-        order = Order.objects.get(pk=orderid)
-        order.paid = True
-        order.paid_amount = cart.get_total_cost()
-        order.save()
-
-        cart.clear()
+#     paid = True
+#     if paid == True:
+#         order = Order.objects.get(pk=orderid)
+#         order.paid = True
+#         order.paid_amount = cart.get_total_cost()
+#         order.save()
+#         cart.clear()
     
-    return JsonResponse(jsonresponse)
+#     return JsonResponse(jsonresponse)
 
         
 

@@ -1,13 +1,17 @@
 from django.db import models
-from app.models import *
+from app.models import Category, Product, ProductImage, Publisher
+from userprofile.models import User
 # Create your models here.
 
-class Order(models.Model):
-    class Status:
-        NEW = 0
-        DELIVERED = 1
-        CANCELED = 2
 
+class Status(models.Model):
+    name = models.CharField(max_length=10, verbose_name='Status')
+
+    def __str__(self):
+        return self.name
+
+class Order(models.Model):
+    user = models.ForeignKey(User, related_name='orders', on_delete=models.SET_NULL, blank=True, null=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20, null=True, blank=True)
@@ -21,12 +25,15 @@ class Order(models.Model):
     used_coupon = models.CharField(max_length=50, blank=True, null=True)
     payment_intent = models.CharField(max_length=255, blank=True, null=True)
     deliver_date = models.DateTimeField(null=True, blank=True)
-    status = models.IntegerField(null=True, blank=True, default=0)
+    status = models.ForeignKey(Status, null=True, blank=True, on_delete=models.CASCADE)
     def __str__(self):
         return '%s' % self.first_name
 
     class Meta:
         ordering = ('-create_at',)
+
+    def get_total_quantity(self):
+        return sum(int(item.quantity) for item in self.items.all())
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)

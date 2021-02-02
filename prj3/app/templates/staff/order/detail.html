@@ -21,13 +21,15 @@
             <th>Price</th>
           </thead>
           <tbody>
+            {% for o in orderDetail %}
               <tr>
-                {% for o in orderDetail %}
+               
                   <td>{{ o.product.name }}</td>
                   <td>{{ o.quantity }}</td>
                   <td>{{ o.price }}</td>
-                {% endfor %}
+                
               </tr>
+              {% endfor %}
           </tbody>
           <tfoot>
               <tr>
@@ -49,9 +51,9 @@
               <tr>
                 <td>Order status</td>
                 <td>
-                  {% if order.status == 0 %} Mới {%endif%}
-                  {% if order.status == 1 %} Đã giao hàng {%endif%}
-                  {% if order.status == 2 %} Đã hủy {%endif%}
+                  {% if order.status.id == 1 %} Mới {%endif%}
+                  {% if order.status.id == 2 %} Đã giao hàng {%endif%}
+                  {% if order.status.id == 3 %} Đã hủy {%endif%}
                 </td>
               </tr>
           </tfoot>
@@ -115,7 +117,7 @@
    
     
     <div class="mb-3">
-      {% if order.status == 0 %}      
+      {% if order.status.id == 1 %}      
         <a class="btn btn-primary mr-1"
         href='javascript:confirmOrderDeliver({{order.id}})'>
           Xác nhận đã giao hàng

@@ -5,23 +5,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="../../static/css/style.css">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <title>{% block title %}Trang chủ{% endblock %}</title>
+
+    <script src="{% static 'js/bootstrap/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/jquery-3.4.1.slim.min.js' %}"></script>
+    
+    <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/font-awesome.min.css' %}">
+    
+    <script src="{% static 'js/vue/vue.js' %}"></script>
+    <script src="{% static 'js/vue/vuex.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/helplayout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shared-new.css' %}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
-    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/vendors/jquery.min.js"></script>
-    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js"></script>
-
 </head>
 
 {% block header %}
@@ -35,7 +38,7 @@
                             <div class="left-header clearfix">
                                 <ul class="left">
                                     <li class=""> 
-                                        <a href="">
+                                        <a href="{% url 'help' %}">
                                             <i class="fa fa-info-circle"></i>
                                             Trợ giúp
                                         </a>
@@ -68,18 +71,28 @@
                                             Kiểm tra đơn hàng
                                         </a>
                                     </li>
+                                   
+                                    {% if request.user.is_authenticated %}
+                                    <li>
+                                        <a href="{% url 'account' %}">{{ request.user.username }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'logout' %}" class="">Đăng xuất</a>
+                                    </li>
+                                    {% else %}
                                     <li class="">
-                                        <a href="">
+                                        <a href="{% url 'login' %}">
                                             <i class="fa fa-sign-in"></i>
                                             Đăng nhập
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="">
+                                        <a href="{% url 'signup' %}">
                                             <i class="fa fa-user-plus"></i>
                                             Đăng ký
                                         </a>
                                     </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div> 
@@ -96,11 +109,11 @@
                     </a>
                 </div>
                 <div class="search-box col-md-6">
-                    
-                        <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off">
-                        <span class="button-search fa fa-search">
-                        </span>
-                    
+                    <form action="{% url 'search' %}" method="GET" >
+                        <input type="text" placeholder="Tìm kiếm sản phẩm mong muốn..." autocomplete="off" name="query" >
+                        <button class="button-search fa fa-search" style="border: none; background-color: white;" type="submit" >
+                        </button>
+                    </form>
                 </div>
                 <div class="contact col-md-4">
                     <div class="hotline col-md-7">
@@ -131,34 +144,274 @@
         <div class="name">
             <h4>NHÀ SÁCH TRỰC TUYẾN BOOKBUY.VN</h4>
         </div>
-        <div class="content">
-            
-        Mua sách online tại nhà sách trực tuyến Bookbuy.vn để được cập nhật nhanh nhất các tựa sách đủ thể loại với mức giảm 15 – 35% cùng nhiều ưu đãi, quà tặng kèm. Qua nhiều năm, không chỉ là địa chỉ tin cậy để bạn mua sách trực tuyến, Bookbuy còn có quà tặng, văn phòng phẩm, vật dụng gia đình,…với chất lượng đảm bảo, chủng loại đa dạng, chế độ bảo hành đầy đủ và giá cả hợp lý từ hàng trăm thương hiệu uy tín trong và ngoài nước. Đặc biệt, bạn có thể chọn những mẫu sổ tay handmade hay nhiều món quà tặng sinh nhật độc đáo chỉ có tại Bookbuy.vn.
-        <br>
-        Mua sách online tại Bookbuy, bạn được tận hưởng chính sách hỗ trợ miễn phí đổi trả hàng, giao hàng nhanh – tận nơi – miễn phí*, thanh toán linh hoạt - an toàn, đặc biệt giảm thêm trên giá bán khi sử dụng BBxu giúp bạn mua sách online giá 0đ!
-        <br>
-        Chỉ với 3 cú click chuột, chưa bao giờ trải nghiệm mua sách online lại dễ chịu và nhẹ nhàng như vậy. Còn chần chờ gì nữa, đặt mua ngay những tựa sách hay cùng hàng ngàn sản phẩm chất lượng khác tại Bookbuy.vn!
-        </div>
+        <div id="bb-footer">
+            <div class="f-below">
+                <div class="container">
+                    <div class="f-below-container row">
+                        <div class="help-links mobile-footer col-md-3 col-sm-3 col-xs-12">
+                            <ul class="ul-main">
+                                <li>
+    
+                                    <p class="header">HỖ TRỢ KHÁCH HÀNG</p>
+                                    
+                                    <label class="menu-icon" for="tabmenu1"><span class="navicon"></span></label>
+    
+                                    <ul class="menu">
+                                        <li><span></span><a href="tel:0933109009">Sản phẩm & Đơn hàng: 0933 109 009</a> </li>
+                                        <li><span></span><a href="tel:0989439986">Kỹ thuật & Bảo hành: 0989 439 986</a></li>
+                                        <li><span></span><a href="tel:02838207153">Điện thoại: (028) 3820 7153 (giờ hành chính) </a></li>
+                                        <li><span></span><a href="mailto:info@bookbuy.vn">Email: info@bookbuy.vn</a></li>
+                                        <li><span></span> Địa chỉ: 147 Pasteur, Phường 6, Quận 3, TP.HCM</li>
+                                        <li><span></span><a href="/lien-he.html">Sơ đồ đường đi</a></li>
+    
+                                    </ul>
+                                </li>
+    
+                            </ul>
+                        </div>
+                        <div class="help-links mobile-footer col-md-3 col-sm-3 col-xs-12">
+                            <ul class="ul-main">
+                                <li>
+    
+                                    <p class="header">TRỢ GIÚP</p>
+                                
+                                    <label class="menu-icon" for="tabmenu2"><span class="navicon"></span></label>
+    
+                                    <ul class="menu">
+    
+                                        <li><span></span><a id="btnTopNewsLetter" href="javascript:void(0)">Đăng ký nhận bản tin</a></li>
+                                        <li><span></span><a href="/Help/Index/#helporder">Hướng dẫn mua hàng</a></li>
+                                        <li><span></span><a href="/Help/Index/#paymenttype">Phương thức thanh toán</a></li>
+                                        <li><span></span><a href="/Help/Index/#shippingtype">Phương thức vận chuyển</a></li>
+                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#returnpolicy">Chính sách đổi - trả</a></li>
+                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#refundpolicy">Chính sách bồi hoàn</a></li>
+                                        <li><span></span><a href="/cau-hoi-thuong-gap.html">Câu hỏi thường gặp (FAQs)</a></li>
+                                    </ul>
+                                </li>
+    
+                            </ul>
+                        </div>
+                        <div class="help-links mobile-footer col-md-3 col-sm-3 col-xs-12">
+                            <ul class="ul-main">
+    
+                                <li>
+                                    <p class="header">   TÀI KHOẢN CỦA BẠN</p>
+                                 
+                                    <label class="menu-icon" for="tabmenu3"><span class="navicon"></span></label>
+    
+    
+                                    <ul class="menu">
+                                        <li><span></span><a href="/cap-nhat-tai-khoan.html">Cập nhật tài khoản</a></li>
+                                        <li><span></span><a href="/gio-hang.html">Giỏ hàng</a></li>
+                                        <li><span></span><a href="/lich-su-giao-dich/1.html">Lịch sử giao dịch</a></li>
+                                        <li><span></span><a href="/san-pham-yeu-thich/1.html">Sản phẩm yêu thích</a></li>
+                                        <li><span></span><a href="/kiem-tra-don-hang.html">Kiểm tra đơn hàng</a></li>
+                                    </ul>
+                                </li>
+    
+                            </ul>
+                        </div>
+                        <div class="help-links mobile-footer col-md-3 col-sm-3 col-xs-12">
+                            <ul class="ul-main">
+                                <li class="item-last">
+                                    <p class="header">  BOOKBUY</p>
+                                   
+                                    <label class="menu-icon" for="tabmenu4"><span class="navicon"></span></label>
+    
+                                    <ul class="menu">
+                                        <li><span></span><a href="/gioi-thieu-bookbuy.html">Giới thiệu bookbuy.vn</a></li>
+                                        <li><span></span><a href="http://facebook.com/bookbuy.vn">BookBuy trên Facebook</a></li>
+                                        <li><span></span><a href="/lien-he.html">Liên hệ BookBuy</a></li>
+                                        <li><span></span><a href="/dat-hang-theo-yeu-cau.html">Đặt hàng theo yêu cầu</a></li>
+                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#plasticinfo">Bao plastic cho sách</a></li>
+                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#bbxupolicy">Tích lũy BBxu</a></li>
+                                        <li><span></span><a href="http://kaspersky.proguide.vn/">Proguide.vn - Kaspersky</a></li>
+                                        <li><span></span><a href="http://ibookstop.vn/">iBookStop.vn</a></li>
+                                    </ul>
+                                </li>
+    
+                            </ul>
+                        </div>
+    
+                        <div class="h-links col-md-12 mobile-footer col-sm-12 col-xs-12">
+                            <ul class="ul-main">
+                                <li>
+                                    <p class="header">   DANH MỤC PHỔ BIẾN</p>
+                                    <input class="menu-btn" type="checkbox" id="tabmenu5" />
+                                    <label class="menu-icon" for="tabmenu5"><span class="navicon"></span></label>
+                                    <ul class="menu">
+                                        <li><span></span><a href="/pc?ct=420"><i class="fa fa-caret-right"></i> Truyện thiếu nhi</a></li>
+                                        <li><span></span><a href="/pc?ct=58&tt=van-hoc" style="padding: 3px 10px 3px 0px;"><i class="fa fa-caret-right"></i> Sách văn học</a></li>
+                                        <li><span></span><a href="/pc?ct=671"><i class="fa fa-caret-right"></i> Học sinh chân kinh</a></li>
+                                        <li><span></span><a href="/pc?ct=756"><i class="fa fa-caret-right"></i> Hoàng Sa - Trường Sa</a></li>
+                                        <li><span></span><a href="/pc?ct=183"><i class="fa fa-caret-right"></i> Thần đồng đất việt </a></li>
+                                        <li><span></span><a href="/qua-tang/handmade/ct388/p1"><i class="fa fa-caret-right"></i> Quà Handmade</a></li>
+                                        <li><span></span><a href="/van-phong-pham/dung-cu-sang-tao/ct891/p1"><i class="fa fa-caret-right"></i> Vật dụng sáng tạo</a></li>
+                                        <li><span></span><a href="/sach/ky-nang-quan-ly/ct579/p1"><i class="fa fa-caret-right"></i> Sách quản lý</a></li>
+                                        <li><span></span><a href="/sach/english-/ct871/p1"><i class="fa fa-caret-right"></i> Sách học Tiếng Anh</a></li>
+                                        <li><span></span><a href="/vat-dung-gia-dinh/du-lich-phuot/ct664/p1"><i class="fa fa-caret-right"><span class="sp"> Du lịch, phượt</span></i></a></li>
+                                        <li><span></span><a href="/nha-san-xuat/LEGO/ct6id180/p1"><i class="fa fa-caret-right"></i> Game Lego</a></li>
+                                        <li><span></span><a href="/van-phong-pham/so-tay/ct117/p1"><i class="fa fa-caret-right"></i> Sổ tay</a></li>
+                                        <li><span></span><a href="/vat-dung-gia-dinh/tui-the-thao/ct896/p1"><i class="fa fa-caret-right"></i> Túi thể thao</a></li>
+                                        <li><span></span><a href="/vat-dung-gia-dinh/do-dung-ca-nhan/ct802/p1"><i class="fa fa-caret-right"></i> Bóp, ví</a></li>
+                                        <li><span></span><a href="/cong-nghe/wacom/ct497/p1"><i class="fa fa-caret-right"></i> Bảng vẽ Wacom</a></li>
+                                        <li><span></span><a href="/sach/14095/quang-ganh-lo-di-va-vui-song-ban-moi-2012-%28bia-mem%29.html"><i class="fa fa-caret-right"></i> Quẳng gánh lo đi và vui sống</a></li>
+                                        <li><span></span><a href="/qua-tang/thu-bong-do-choi-vai/ct727/p1"><i class="fa fa-caret-right"></i> Gấu bông</a></li>
+                                        <li><span></span><a href="/qua-tang/dong-ho-tranh/ct846/p1"><i class="fa fa-caret-right"></i> Đồng hồ tranh</a></li>
+                                        <li><span></span><a href="/qua-tang/qua-tang-cho-be/ct386/p1"><i class="fa fa-caret-right"></i> Đồ chơi an toàn</a></li>
+                                        <li><span></span><a href="/qua-tang/khan-choang/ct748/p1"><i class="fa fa-caret-right"></i> Khăn quàng cổ</a></li>
+                                        <li><span></span><a href="/vat-dung-gia-dinh/ghe-luoi/ct839/p1"><i class="fa fa-caret-right"><span class="sp"> Ghế lười</span></i></a></li>
+                                        <li><span></span><a href="/tac-gia/nguyen-nhat-anh-auth532/p1"><i class="fa fa-caret-right"></i> Truyện Nguyễn Nhật Ánh</a></li>
+                                        <li><span></span><a href="/sach/kinh-di-gia-tuong-trinh-tham/ct567/p1"><i class="fa fa-caret-right"></i> Truyện trinh thám</a></li>
+                                        <li><span></span><a href="http://cmavn.org/truyen-tranh/khoa-hoc-ve-truyen-tranh-chuyen-nghiep"><i class="fa fa-caret-right"></i>Hoc ve</a></li>
+                                        <li><span></span><a href="/vat-dung-gia-dinh/du-lich-phuot/ct664/p1"><i class="fa fa-caret-right"></i> Do phuot</a></li>
+                                        <li><span></span><a href="http://cmavn.org/hoat-hinh/khoa-hoc-lam-phim-hoat-hinh-3d-chuyen-nghiep"><i class="fa fa-caret-right"></i> Phim hoat hinh 3D</a></li>
+                                        <li><span></span><a href="/vat-dung-gia-dinh/qua-luu-niem/ct387/p1"><i class="fa fa-caret-right"></i> Qua luu niem</a></li>
+                                        <li><span></span><a href="http://cmavn.org/hoat-hinh/khoa-hoc-lam-phim-hoat-hinh-2d-animation-artist"><i class="fa fa-caret-right"></i> Phim hoat hinh 2D</a></li>
+                                        <li><span></span><a href="http://cmavn.org/game/khoa-hoc-chuyen-vien-thiet-ke-game-dinh-cao-game-artist"><i class="fa fa-caret-right"></i> Thiet ke game</a></li>
+                                        <li><span></span><a href="/sach/song-dep/ct50/p1"><i class="fa fa-caret-right"></i> Qua tang cuoc song</a></li>
+                                        <li><span></span><a href="/sach/english-/ct871/p1"><i class="fa fa-caret-right"></i> Tai lieu tieng anh</a></li>
+                                        <li><span></span><a href="/bo-suu-tap/hat-giong-tam-hon/22970/p1"><i class="fa fa-caret-right"></i> Qua tang cuoc song</a></li>
+                                        <li><span></span><a href="/qua-tang/qua-tang-cho-nu/ct385/p1"><i class="fa fa-caret-right"></i> Qua 8/3</a></li>
+                                        <li><span></span><a href="/qua-tang.html"><i class="fa fa-caret-right"></i> Qua sinh nhat</a></li>
+                                        <li><span></span><a href="/sach.html"><i class="fa fa-caret-right"></i> Sinh nhat</a></li>
+                                        <li><span></span><a href="/sach/truyen-ngon-tinh/ct861/p1"><i class="fa fa-caret-right"></i> Truyen ngon tinh</a></li>
+                                        <li><span></span><a href="/sach/dam-my/ct860/p1"><i class="fa fa-caret-right"></i> Truyen dam my</a></li>
+                                        <li><span></span><a href="/tac-gia/marc-levy-auth3721/p1"><i class="fa fa-caret-right"></i> Marc Levy</a></li>
+                                        <li><span></span><a href="/sach/tieu-thuyet/ct278/p1"><i class="fa fa-caret-right"></i> Tieu thuyet tình cam</a></li>
+                                        <li><span></span><a href="/sach/kinh-te/ct62/p1"><i class="fa fa-caret-right"></i> Kinh te</a></li>
+                                        <li><span></span><a href="/sach/ky-nang-song/ct585/p1"><i class="fa fa-caret-right"></i> Ky nang song</a></li>
+                                        <li><span></span><a href="/sach/tu-vi-chiem-tinh/ct889/p1"><i class="fa fa-caret-right"></i> Tu vi</a></li>
+                                        <li><span></span><a href="/sach/tieng-nhat/ct607/p1"><i class="fa fa-caret-right"></i> Hoc tieng nhat</a></li>
+                                        <li><span></span><a href="/vat-dung-gia-dinh/balo/ct739/p1"><i class="fa fa-caret-right"></i> Balo</a></li>
+                                        <li><span></span><a href="/truyen-tranh.html"><i class="fa fa-caret-right"></i> Truyen tranh</a></li>
+                                        <li><span></span><a href="/van-phong-pham/40645/but-chi-mau-nuoc-raffine-marco-36-mau-hop-thiec-7120-36tn.html "> <i class="fa fa-caret-right"></i> Chi Mau Marco</a></li>
+    
+                                    </ul>
+    
+                                </li>
+                            </ul>
+                        </div>
+    
+                        <div class="payment-box col-md-12 col-sm-12 col-xs-12">
+    
+                            <div class="payment-types">
+                                <ul>
+                                    <li class="li-first">
+                                        Chấp nhận thanh toán :
+                                    </li>
+                                    <li>
+                                        <a class="visa-master">
+                                            <img src="{% static 'images/local/visa-master.png' %}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="onepay">
+                                            <img src="{% static 'images/local/internet-banking-icon.png' %}" alt="">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="visa-jcb">
+                                            <img src="{% static 'images/local/jcb.png' %}" alt="">
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a class="moca-pay">
+                                            <img src="{% static 'images/local/moca_logo.png' %}" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+    
+                            <div class="social-networks">
+                                <ul>
+                                    <li class="li-first">
+                                        Làm bạn với BookBuy :
+                                    </li>
+                                    <li class="fb">
+                                        <a target="_blank" href="http://facebook.com/bookbuy.vn"></a>
+                                    </li>
+                                    <li class="zl">
+                                        <a target="_blank" href="tel:0933109009"></a>
+                                    </li>
+                                    <li class="ins">
+                                        <a target="_blank" href="//www.instagram.com/bookbuy.vn"></a>
+                                    </li>
+                                    <li class="pin">
+                                        <a target="_blank" href="http://pinterest.com/bookbuyvn"></a>
+                                    </li>
+                                    <li class="yt">
+                                        <a target="_blank" href="//www.youtube.com/channel/UCvO9qDWw9UZGma5Fr2BcorQ"></a>
+                                    </li>
+    
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+    
+    
+                        </div>
+    
+                        <div class="copyright col-md-12 col-sm-12 col-xs-12">
+                            
+                            <div class="certificate">
+                                <a target="_blank" href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=815"><img class="slimmage" style="height:50px;" src="" /></a>
+                            </div>
+                            <div class="clearfix"></div>
+    
+                        </div>
+    
+                        <div class="clearfix"></div>
+                        <br />
+                    </div>
+                </div>
+    
+            </div>
+            <div class="newsletter-toggle active hidden-xs">
+    
+    <form action="/BookBuy/RegisterLetter" data-ajax="true" data-ajax-failure="EmailRegisterToggleFailure" data-ajax-success="EmailRegisterToggleSuccess" id="emailletter-toggle" method="post">                
+        <h4 class="header-newsletter-toggle">
+                        <span>Đăng ký nhận bản tin từ Bookbuy</span>
+                        <a class="toggle">
+                            <i class="fa fa-angle-down"></i>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </h4>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="EmailLetter" required="" id="emaillettertoggle" placeholder="Email của bạn" />
+                        <span class="toggle-error"></span>
+                        <span class="toggle-success"></span>
+                        <input type="hidden" id="sexIdToggle" name="sexId" />
+                        <ul class="action-submit">
+                            <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="1">NAM</a></li>
+                            <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="0">NỮ</a></li>
+                            <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="2">LGBT</a></li>
+                        </ul>
+                        
+                    </div>
+    </form>
     </div>
     {% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuex@3.6.0/dist/vuex.js"></script>
+    
     <script>
         
         var store = new Vuex.Store({
-			state: {
+            state: 
+            {
                 numItems: {{ cart.get_total_length }},
-                totalCost: {{ cart.get_total_cost }},
+                totalCost: {{ cart.get_total_cost }}
             },
             mutations: {
-                increment(state, quantity) {
+                increment(state, quantity) 
+                {
                     state.numItems += quantity;
                 },
-                changeTotalCost(state, newCost){
+                changeTotalCost(state, newCost)
+                {
                     state.totalCost += newCost;
                 }
-            },
+            }
         });
         var navbarapp = new Vue({
             el: '#navbarapp',

@@ -2,79 +2,8 @@
 
 
 {% block content %} 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
-
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-    }
-.custom-menu-homepage{
-    padding-top: 15px;
-}
-.category-title{
-    line-height: 38px;
-    min-height: 42px;
-    width: 100%;
-    padding: 0 20px;
-    background-color: #f7941e;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-}
-.dropdown-menu{
-    width: 840px;
-}
-
-
-.product-image{
-    width: 95%;
-}
-.menu{
-    background-color: white;
-}
-.menu ul li:hover{
-    background-color: #FCDAB0;
-}   
-
-.dropdown .dropdown-menu{
-    position: absolute;
-}
-.dropdown:hover .dropdown-menu{
-    display: block;
-}
-.img-container{
-    width: 200px;
-    height: 200px;
-    position: relative;
-    
-}
-.img-container img{
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-   
-    transform: translate(-50%, -50%);
-}
-.row ul{
-    list-style: none;
-}
-.row ul li{
-    float: left;
-}
-.main-content{
-    background-color: white;
-}
-.product-name{
-    width: 150px;
-}
-</style>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 <div class="container">
     <div class="row custom-menu-homepage">
@@ -83,6 +12,7 @@
                 <div class="category-title">
                     Danh mục sản phẩm
                 </div>
+                
                 <div class="menu">
                     <ul class="navbar-nav ml-auto">
                         {% for c in listCategory %}

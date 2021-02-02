@@ -10,7 +10,6 @@ from .cart import Cart
 from order.models import Order
 
 
-
 def webhook(request):
     payload = request.body
     event = None
@@ -26,9 +25,13 @@ def webhook(request):
 
     if event.type == 'payment_intent.succeeded':
         payment_intent = event.data.object
-        print('PaymentIntent was successful!')
         order = Order.objects.get(payment_intent=payment_intent.id)
-        order.paid = True
+        
         order.save()
-    
+
+        for item in order.items.all():
+            product = item.product
+            product.num_available = product.num_available - item.quantity
+            product.save()
+
     return HttpResponse(status=200)

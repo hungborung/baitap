@@ -40,10 +40,10 @@ CART_SESSION_ID = 'cart'
 
 INSTALLED_APPS = [
     'app',
-    'accounts',
     'cart',
     'order',
     'coupon',
+    'userprofile',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,13 @@ TEMPLATES = [
 ]
 
 
-AUTH_USER_MODEL = 'accounts.Account'
+
+AUTH_USER_MODEL = 'userprofile.User'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+LOGIN_URL = 'login'
+
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
@@ -152,8 +159,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
     
 
 
-LOGIN_REDIRECT_URL = 'staff-home'
-LOGOUT_REDIRECT_URL = 'staff-home'
+
 
 APP_UNIQUE_SLUG_MAX_LENGTH = 20
 

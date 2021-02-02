@@ -96,18 +96,23 @@ class Product(models.Model):
     category = models.ForeignKey(Category, verbose_name='Nhóm', on_delete=models.PROTECT)  
     qty = models.FloatField(verbose_name='Số lượng')
     image = models.ImageField(blank=True,null=True ,upload_to='')
+    thumbnail = models.ImageField(blank=True,null=True ,upload_to='')
     is_featured = models.BooleanField(default=False)
     date_create = models.DateTimeField(verbose_name='Ngày tạo', auto_now_add=True )
     date_update = models.DateTimeField(verbose_name='Ngày sửa', null=True, auto_now=True)
-
+    num_available = models.IntegerField(default=1)
 
     class Meta:
         ordering = ('-date_create',)
     def __str__(self):
         return self.name
+    
+    
+    def save(self, *args, **kwargs):
+        self.thumbnail = self.make_thumbnail(self.image)
 
-   
-
+        super().save(*args, **kwargs)
+    
     def get_image(self):
         if self.image:
             return self.image.url
@@ -120,29 +125,49 @@ class Product(models.Model):
             else:
                 return ''
                 
-    def make_image(self, image, size=(300,200)):
+    def make_thumbnail(self, image, size=(300, 200)):
         img = Image.open(image)
         img.convert('RGB')
-        img.image(size)
-        img_io = BytesIO()
-        img.save(img_io, 'JPEG', quality=85)
+        img.thumbnail(size)
 
-        image = File(img_io, name = image.name)
-        return image
-    
+        thumb_io = BytesIO()
+        img.save(thumb_io, 'JPEG', quality=85)
+
+        thumbnail = File(thumb_io, name=image.name)
+
+        return thumbnail
+
+    def get_absolute_url(self):
+            return '/%s/%s/' % (self.category.slug,self.slug )
+
+
     @property
     def price_discount(self):
         return self.price_sell * ((100-self.discount)/100)
 
-class Images(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50, blank=True)
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(blank=True, upload_to='')
+    thumbnail = models.ImageField(upload_to='upload/', blank=True, null= True)
 
-    def __str__(self):
-        return self.title
+    
 
+    def save(self, *args, **kwargs):
+        self.thumbnail = self.make_thumbnail(self.image)
 
+        super().save(*args, **kwargs)
+
+    def make_thumbnail(self, image, size=(300, 200)):
+        img = Image.open(image)
+        img.convert('RGB')
+        img.thumbnail(size)
+
+        thumb_io = BytesIO()
+        img.save(thumb_io, 'JPEG', quality=85)
+
+        thumbnail = File(thumb_io, name=image.name)
+
+        return thumbnail
 
 
 

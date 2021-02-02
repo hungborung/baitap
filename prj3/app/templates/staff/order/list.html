@@ -27,6 +27,22 @@
     </div>
     <!-- /.content-header -->
 
+    <div class="search-option">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <select name='statusId' class="form-control" style="width: 200px">  
+          <option value="">--Chọn Trạng thái--</option>  
+          {% for s in status %}    
+          <option {%if s.id == priceId%}selected{%endif%}
+            value="{{s.id}}">{{s.name}}</option>
+          {% endfor %}   
+        </select>
+
+        <button class="mt-3 btn btn-primary" type="submit">
+          Tìm kiếm
+        </button>
+      </form>
+    </div>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -56,9 +72,9 @@
                   {{ o.paid_amount }}đ
                 </td>
                 <td>
-                  {% if o.status == 0 %} Mới {%endif%}
-                  {% if o.status == 1 %} Đã giao hàng {%endif%}
-                  {% if o.status == 2 %} Đã hủy {%endif%}
+                  {% if o.status.id == 1 %} Mới {%endif%}
+                  {% if o.status.id == 2 %} Đã giao hàng {%endif%}
+                  {% if o.status.id == 3 %} Đã hủy {%endif%}
                 </td>
                 <td>
                   {% if o.paid == False %} Chưa thanh toán {% endif %}

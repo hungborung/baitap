@@ -19,7 +19,19 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="{{product.image.url}}" class="img-fluid" alt="">
+          <img :src="mainImage" class="img-fluid" alt="">
+          <hr>
+          {% if product.thumbnail %}
+          <div class="img-product">
+              <div class="row">
+                <div class="col-md-2" v-for="image in images">
+                  <img :src="image.thumbnail" alt="" @click="changeMainImage(image.image)" style="width: 90px; height: 90px;">
+                </div>
+              </div>
+            
+
+          </div>
+          {% endif %}
 
         </div>
         <!--Grid column-->
@@ -52,12 +64,12 @@
             </div>
             <p class="lead product-price">
               {% if product.discount > 0 %}
-                <span>{{ price_discount }}</span>
+                <span>{{ priceDiscount }}đ</span>
                 <span class="mr-1">
-                  <del>{{ product.price_sell }}</del>
+                  <del>{{ product.price_sell }}đ</del>
                 </span>
               {% else %}
-                <span>{{ product.price_sell }}</span>
+                <span>{{ product.price_sell }}đ</span>
               {% endif %}
             </p>
             <div class="expected-delivery">
@@ -80,9 +92,16 @@
             </div>
             <div class="cart pt-2">
               <!-- Default input -->
-              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px; float: left;">
-              <button class="btn btn-outline-primary" @click="addToCart({{ product.id }})" style="float: left; margin-left: 20px;">Add to cart
-                
+              {% if product.in_cart %}
+                <p>Already in cart!</p>
+              {% else %}
+                {% if product.num_available > 0 %}
+                  <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px; float: left;">
+                  <button class="btn btn-outline-primary" @click="addToCart({{ product.id }})" style="float: left; margin-left: 20px;">Add to cart
+                {% else %}  
+                  <p>Sản phẩm hết hàng</p>
+                {% endif %}
+              {% endif %}
               </button>
               <p>{{ name }}</p>
             </div>
@@ -198,7 +217,8 @@
       store: store,
       data () {
           return {
-              
+            mainImage: '{{ product.image.url }}',
+            images: [{{ imagesstring|safe }}]
           }
       },
       mounted() {

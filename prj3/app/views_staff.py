@@ -128,12 +128,13 @@ def listOrder(request):
     except EmptyPage:
         orders = paginator.page(paginator.num_pages)
 
-
+    status = Status.objects.all()
     context = {
         'orderList' : orderList,
         'page' : 'page',
         'orders' : orders,
         'total' : paginator.count,
+        'status': status,
 
     }
     return render(request, 'staff/order/list.html', context)
@@ -142,12 +143,11 @@ def listOrder(request):
 def viewOrder(request, pk):
     order = Order.objects.get(pk=pk)
     orderDetail = OrderItem.objects.filter(order=pk)
-
-
+    
     context = {
         'orderDetail': orderDetail,
         'order': order,
-
+        
     }
     return render(request, 'staff/order/detail.html', context)
 
@@ -155,14 +155,15 @@ def viewOrder(request, pk):
 @login_required
 def confirmOrderDeliver(request, pk):
     order = Order.objects.get(pk=pk)
-    order.status = Order.Status.DELIVERED
+    order.status = Status.objects.get(id=2)
     order.deliver_date = datetime.now()
     order.save()
+    
     return redirect('list-order')
 
 @login_required
 def cancelOrder(request, pk):
     order = Order.objects.get(pk=pk)
-    order.status = Order.Status.CANCELED
+    order.status = Status.objects.get(id=3)
     order.save()
     return redirect('list-order')
