@@ -8,8 +8,8 @@
 
   
   <div class="container pt-2 mb-5">
-    <nav class="breadcrumb-bar pb-1" aria-label="breadcrumbs">
-      <ul class="breadcrumb">
+    <nav class="breadcrumb-bar pb-1" aria-label="breadcrumbs" >
+      <ul class="breadcrumb" style="background-color: #F0F0F0;">
         <li class="breadcrumb-item"><a href="{% url 'home' %}">Trang chủ</a></li>
         {% if category.cat_parent %}
           <li class="breadcrumb-item"><a href="{% url 'categorydetail' category.cat_parent.slug  %}">{{ category.cat_parent.name }}</a></li>

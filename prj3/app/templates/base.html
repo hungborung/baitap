@@ -7,24 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Trang chủ{% endblock %}</title>
 
+    <!-- Bootstrap -->
+    
     <script src="{% static 'js/bootstrap/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap/jquery-3.4.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/jquery.collapser.js' %}"></script>
     
+    <!-- End bootstrap -->
+
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     
-    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap/font-awesome.min.css' %}">
+    
     
     <script src="{% static 'js/vue/vue.js' %}"></script>
     <script src="{% static 'js/vue/vuex.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/helplayout.css' %}">
-    <link rel="stylesheet" href="{% static 'css/shared-new.css' %}">
+
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        li{
+            list-style: none;
+
+        }
+        a:link {
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;  
+        }
+        .h-links ul li ul li{
+            padding-right: 15px;
+        }
+        .h-links ul li ul li a{
+            font-size: 15px;
+            color: #333;
+        }
+        a{
+            color: #333;
+        }
+        .ul-main li p{
+            color: #333;
+            font-weight: bold;
+        }
+        .ul-main ul li{
+            font-size: 15px;
+            display:inline-block;
+        }
+        .
+    </style>
 </head>
 
 {% block header %}
@@ -151,18 +192,14 @@
                         <div class="help-links mobile-footer col-md-3 col-sm-3 col-xs-12">
                             <ul class="ul-main">
                                 <li>
-    
                                     <p class="header">HỖ TRỢ KHÁCH HÀNG</p>
-                                    
-                                    <label class="menu-icon" for="tabmenu1"><span class="navicon"></span></label>
-    
                                     <ul class="menu">
-                                        <li><span></span><a href="tel:0933109009">Sản phẩm & Đơn hàng: 0933 109 009</a> </li>
-                                        <li><span></span><a href="tel:0989439986">Kỹ thuật & Bảo hành: 0989 439 986</a></li>
-                                        <li><span></span><a href="tel:02838207153">Điện thoại: (028) 3820 7153 (giờ hành chính) </a></li>
-                                        <li><span></span><a href="mailto:info@bookbuy.vn">Email: info@bookbuy.vn</a></li>
-                                        <li><span></span> Địa chỉ: 147 Pasteur, Phường 6, Quận 3, TP.HCM</li>
-                                        <li><span></span><a href="/lien-he.html">Sơ đồ đường đi</a></li>
+                                        <li><a href="tel:0933109009">Sản phẩm & Đơn hàng: 0933 109 009</a> </li>
+                                        <li><a href="tel:0989439986">Kỹ thuật & Bảo hành: 0989 439 986</a></li>
+                                        <li><a href="tel:02838207153">Điện thoại: (028) 3820 7153 (giờ hành chính) </a></li>
+                                        <li><a href="mailto:info@bookbuy.vn">Email: info@bookbuy.vn</a></li>
+                                        <li> Địa chỉ: 147 Pasteur, Phường 6, Quận 3, TP.HCM</li>
+                                        <li><a href="/lien-he.html">Sơ đồ đường đi</a></li>
     
                                     </ul>
                                 </li>
@@ -174,18 +211,15 @@
                                 <li>
     
                                     <p class="header">TRỢ GIÚP</p>
-                                
-                                    <label class="menu-icon" for="tabmenu2"><span class="navicon"></span></label>
-    
                                     <ul class="menu">
     
-                                        <li><span></span><a id="btnTopNewsLetter" href="javascript:void(0)">Đăng ký nhận bản tin</a></li>
-                                        <li><span></span><a href="/Help/Index/#helporder">Hướng dẫn mua hàng</a></li>
-                                        <li><span></span><a href="/Help/Index/#paymenttype">Phương thức thanh toán</a></li>
-                                        <li><span></span><a href="/Help/Index/#shippingtype">Phương thức vận chuyển</a></li>
-                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#returnpolicy">Chính sách đổi - trả</a></li>
-                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#refundpolicy">Chính sách bồi hoàn</a></li>
-                                        <li><span></span><a href="/cau-hoi-thuong-gap.html">Câu hỏi thường gặp (FAQs)</a></li>
+                                        <li><a id="btnTopNewsLetter" href="javascript:void(0)">Đăng ký nhận bản tin</a></li>
+                                        <li><a href="/Help/Index/#helporder">Hướng dẫn mua hàng</a></li>
+                                        <li><a href="/Help/Index/#paymenttype">Phương thức thanh toán</a></li>
+                                        <li><a href="/Help/Index/#shippingtype">Phương thức vận chuyển</a></li>
+                                        <li><a href="/cau-hoi-thuong-gap.html#returnpolicy">Chính sách đổi - trả</a></li>
+                                        <li><a href="/cau-hoi-thuong-gap.html#refundpolicy">Chính sách bồi hoàn</a></li>
+                                        <li><a href="/cau-hoi-thuong-gap.html">Câu hỏi thường gặp (FAQs)</a></li>
                                     </ul>
                                 </li>
     
@@ -196,16 +230,18 @@
     
                                 <li>
                                     <p class="header">   TÀI KHOẢN CỦA BẠN</p>
-                                 
-                                    <label class="menu-icon" for="tabmenu3"><span class="navicon"></span></label>
-    
-    
                                     <ul class="menu">
-                                        <li><span></span><a href="/cap-nhat-tai-khoan.html">Cập nhật tài khoản</a></li>
-                                        <li><span></span><a href="/gio-hang.html">Giỏ hàng</a></li>
-                                        <li><span></span><a href="/lich-su-giao-dich/1.html">Lịch sử giao dịch</a></li>
-                                        <li><span></span><a href="/san-pham-yeu-thich/1.html">Sản phẩm yêu thích</a></li>
-                                        <li><span></span><a href="/kiem-tra-don-hang.html">Kiểm tra đơn hàng</a></li>
+                                        <li>
+                                            <a href="/cap-nhat-tai-khoan.html">Cập nhật tài khoản</a>
+                                        </li>
+                                        <li>
+                                            <a href="/gio-hang.html">Giỏ hàng</a>
+                                        </li>
+                                        <li>
+                                            <a href="/lich-su-giao-dich/1.html">Lịch sử giao dịch</a>
+                                        </li>
+                                        <li><a href="/san-pham-yeu-thich/1.html">Sản phẩm yêu thích</a></li>
+                                        <li><a href="/kiem-tra-don-hang.html">Kiểm tra đơn hàng</a></li>
                                     </ul>
                                 </li>
     
@@ -215,18 +251,16 @@
                             <ul class="ul-main">
                                 <li class="item-last">
                                     <p class="header">  BOOKBUY</p>
-                                   
-                                    <label class="menu-icon" for="tabmenu4"><span class="navicon"></span></label>
-    
+
                                     <ul class="menu">
-                                        <li><span></span><a href="/gioi-thieu-bookbuy.html">Giới thiệu bookbuy.vn</a></li>
-                                        <li><span></span><a href="http://facebook.com/bookbuy.vn">BookBuy trên Facebook</a></li>
-                                        <li><span></span><a href="/lien-he.html">Liên hệ BookBuy</a></li>
-                                        <li><span></span><a href="/dat-hang-theo-yeu-cau.html">Đặt hàng theo yêu cầu</a></li>
-                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#plasticinfo">Bao plastic cho sách</a></li>
-                                        <li><span></span><a href="/cau-hoi-thuong-gap.html#bbxupolicy">Tích lũy BBxu</a></li>
-                                        <li><span></span><a href="http://kaspersky.proguide.vn/">Proguide.vn - Kaspersky</a></li>
-                                        <li><span></span><a href="http://ibookstop.vn/">iBookStop.vn</a></li>
+                                        <li><a href="/gioi-thieu-bookbuy.html">Giới thiệu bookbuy.vn</a></li>
+                                        <li><a href="http://facebook.com/bookbuy.vn">BookBuy trên Facebook</a></li>
+                                        <li><a href="/lien-he.html">Liên hệ BookBuy</a></li>
+                                        <li><a href="/dat-hang-theo-yeu-cau.html">Đặt hàng theo yêu cầu</a></li>
+                                        <li><a href="/cau-hoi-thuong-gap.html#plasticinfo">Bao plastic cho sách</a></li>
+                                        <li><a href="/cau-hoi-thuong-gap.html#bbxupolicy">Tích lũy BBxu</a></li>
+                                        <li><a href="http://kaspersky.proguide.vn/">Proguide.vn - Kaspersky</a></li>
+                                        <li><a href="http://ibookstop.vn/">iBookStop.vn</a></li>
                                     </ul>
                                 </li>
     
@@ -237,55 +271,54 @@
                             <ul class="ul-main">
                                 <li>
                                     <p class="header">   DANH MỤC PHỔ BIẾN</p>
-                                    <input class="menu-btn" type="checkbox" id="tabmenu5" />
-                                    <label class="menu-icon" for="tabmenu5"><span class="navicon"></span></label>
+
                                     <ul class="menu">
-                                        <li><span></span><a href="/pc?ct=420"><i class="fa fa-caret-right"></i> Truyện thiếu nhi</a></li>
-                                        <li><span></span><a href="/pc?ct=58&tt=van-hoc" style="padding: 3px 10px 3px 0px;"><i class="fa fa-caret-right"></i> Sách văn học</a></li>
-                                        <li><span></span><a href="/pc?ct=671"><i class="fa fa-caret-right"></i> Học sinh chân kinh</a></li>
-                                        <li><span></span><a href="/pc?ct=756"><i class="fa fa-caret-right"></i> Hoàng Sa - Trường Sa</a></li>
-                                        <li><span></span><a href="/pc?ct=183"><i class="fa fa-caret-right"></i> Thần đồng đất việt </a></li>
-                                        <li><span></span><a href="/qua-tang/handmade/ct388/p1"><i class="fa fa-caret-right"></i> Quà Handmade</a></li>
-                                        <li><span></span><a href="/van-phong-pham/dung-cu-sang-tao/ct891/p1"><i class="fa fa-caret-right"></i> Vật dụng sáng tạo</a></li>
-                                        <li><span></span><a href="/sach/ky-nang-quan-ly/ct579/p1"><i class="fa fa-caret-right"></i> Sách quản lý</a></li>
-                                        <li><span></span><a href="/sach/english-/ct871/p1"><i class="fa fa-caret-right"></i> Sách học Tiếng Anh</a></li>
-                                        <li><span></span><a href="/vat-dung-gia-dinh/du-lich-phuot/ct664/p1"><i class="fa fa-caret-right"><span class="sp"> Du lịch, phượt</span></i></a></li>
-                                        <li><span></span><a href="/nha-san-xuat/LEGO/ct6id180/p1"><i class="fa fa-caret-right"></i> Game Lego</a></li>
-                                        <li><span></span><a href="/van-phong-pham/so-tay/ct117/p1"><i class="fa fa-caret-right"></i> Sổ tay</a></li>
-                                        <li><span></span><a href="/vat-dung-gia-dinh/tui-the-thao/ct896/p1"><i class="fa fa-caret-right"></i> Túi thể thao</a></li>
-                                        <li><span></span><a href="/vat-dung-gia-dinh/do-dung-ca-nhan/ct802/p1"><i class="fa fa-caret-right"></i> Bóp, ví</a></li>
-                                        <li><span></span><a href="/cong-nghe/wacom/ct497/p1"><i class="fa fa-caret-right"></i> Bảng vẽ Wacom</a></li>
-                                        <li><span></span><a href="/sach/14095/quang-ganh-lo-di-va-vui-song-ban-moi-2012-%28bia-mem%29.html"><i class="fa fa-caret-right"></i> Quẳng gánh lo đi và vui sống</a></li>
-                                        <li><span></span><a href="/qua-tang/thu-bong-do-choi-vai/ct727/p1"><i class="fa fa-caret-right"></i> Gấu bông</a></li>
-                                        <li><span></span><a href="/qua-tang/dong-ho-tranh/ct846/p1"><i class="fa fa-caret-right"></i> Đồng hồ tranh</a></li>
-                                        <li><span></span><a href="/qua-tang/qua-tang-cho-be/ct386/p1"><i class="fa fa-caret-right"></i> Đồ chơi an toàn</a></li>
-                                        <li><span></span><a href="/qua-tang/khan-choang/ct748/p1"><i class="fa fa-caret-right"></i> Khăn quàng cổ</a></li>
-                                        <li><span></span><a href="/vat-dung-gia-dinh/ghe-luoi/ct839/p1"><i class="fa fa-caret-right"><span class="sp"> Ghế lười</span></i></a></li>
-                                        <li><span></span><a href="/tac-gia/nguyen-nhat-anh-auth532/p1"><i class="fa fa-caret-right"></i> Truyện Nguyễn Nhật Ánh</a></li>
-                                        <li><span></span><a href="/sach/kinh-di-gia-tuong-trinh-tham/ct567/p1"><i class="fa fa-caret-right"></i> Truyện trinh thám</a></li>
-                                        <li><span></span><a href="http://cmavn.org/truyen-tranh/khoa-hoc-ve-truyen-tranh-chuyen-nghiep"><i class="fa fa-caret-right"></i>Hoc ve</a></li>
-                                        <li><span></span><a href="/vat-dung-gia-dinh/du-lich-phuot/ct664/p1"><i class="fa fa-caret-right"></i> Do phuot</a></li>
-                                        <li><span></span><a href="http://cmavn.org/hoat-hinh/khoa-hoc-lam-phim-hoat-hinh-3d-chuyen-nghiep"><i class="fa fa-caret-right"></i> Phim hoat hinh 3D</a></li>
-                                        <li><span></span><a href="/vat-dung-gia-dinh/qua-luu-niem/ct387/p1"><i class="fa fa-caret-right"></i> Qua luu niem</a></li>
-                                        <li><span></span><a href="http://cmavn.org/hoat-hinh/khoa-hoc-lam-phim-hoat-hinh-2d-animation-artist"><i class="fa fa-caret-right"></i> Phim hoat hinh 2D</a></li>
-                                        <li><span></span><a href="http://cmavn.org/game/khoa-hoc-chuyen-vien-thiet-ke-game-dinh-cao-game-artist"><i class="fa fa-caret-right"></i> Thiet ke game</a></li>
-                                        <li><span></span><a href="/sach/song-dep/ct50/p1"><i class="fa fa-caret-right"></i> Qua tang cuoc song</a></li>
-                                        <li><span></span><a href="/sach/english-/ct871/p1"><i class="fa fa-caret-right"></i> Tai lieu tieng anh</a></li>
-                                        <li><span></span><a href="/bo-suu-tap/hat-giong-tam-hon/22970/p1"><i class="fa fa-caret-right"></i> Qua tang cuoc song</a></li>
-                                        <li><span></span><a href="/qua-tang/qua-tang-cho-nu/ct385/p1"><i class="fa fa-caret-right"></i> Qua 8/3</a></li>
-                                        <li><span></span><a href="/qua-tang.html"><i class="fa fa-caret-right"></i> Qua sinh nhat</a></li>
-                                        <li><span></span><a href="/sach.html"><i class="fa fa-caret-right"></i> Sinh nhat</a></li>
-                                        <li><span></span><a href="/sach/truyen-ngon-tinh/ct861/p1"><i class="fa fa-caret-right"></i> Truyen ngon tinh</a></li>
-                                        <li><span></span><a href="/sach/dam-my/ct860/p1"><i class="fa fa-caret-right"></i> Truyen dam my</a></li>
-                                        <li><span></span><a href="/tac-gia/marc-levy-auth3721/p1"><i class="fa fa-caret-right"></i> Marc Levy</a></li>
-                                        <li><span></span><a href="/sach/tieu-thuyet/ct278/p1"><i class="fa fa-caret-right"></i> Tieu thuyet tình cam</a></li>
-                                        <li><span></span><a href="/sach/kinh-te/ct62/p1"><i class="fa fa-caret-right"></i> Kinh te</a></li>
-                                        <li><span></span><a href="/sach/ky-nang-song/ct585/p1"><i class="fa fa-caret-right"></i> Ky nang song</a></li>
-                                        <li><span></span><a href="/sach/tu-vi-chiem-tinh/ct889/p1"><i class="fa fa-caret-right"></i> Tu vi</a></li>
-                                        <li><span></span><a href="/sach/tieng-nhat/ct607/p1"><i class="fa fa-caret-right"></i> Hoc tieng nhat</a></li>
-                                        <li><span></span><a href="/vat-dung-gia-dinh/balo/ct739/p1"><i class="fa fa-caret-right"></i> Balo</a></li>
-                                        <li><span></span><a href="/truyen-tranh.html"><i class="fa fa-caret-right"></i> Truyen tranh</a></li>
-                                        <li><span></span><a href="/van-phong-pham/40645/but-chi-mau-nuoc-raffine-marco-36-mau-hop-thiec-7120-36tn.html "> <i class="fa fa-caret-right"></i> Chi Mau Marco</a></li>
+                                        <li><a href="/pc?ct=420"><i class="fa fa-caret-right"></i> Truyện thiếu nhi</a></li>
+                                        <li><a href="/pc?ct=58&tt=van-hoc" style="padding: 3px 10px 3px 0px;"><i class="fa fa-caret-right"></i> Sách văn học</a></li>
+                                        <li><a href="/pc?ct=671"><i class="fa fa-caret-right"></i> Học sinh chân kinh</a></li>
+                                        <li><a href="/pc?ct=756"><i class="fa fa-caret-right"></i> Hoàng Sa - Trường Sa</a></li>
+                                        <li><a href="/pc?ct=183"><i class="fa fa-caret-right"></i> Thần đồng đất việt </a></li>
+                                        <li><a href="/qua-tang/handmade/ct388/p1"><i class="fa fa-caret-right"></i> Quà Handmade</a></li>
+                                        <li><a href="/van-phong-pham/dung-cu-sang-tao/ct891/p1"><i class="fa fa-caret-right"></i> Vật dụng sáng tạo</a></li>
+                                        <li><a href="/sach/ky-nang-quan-ly/ct579/p1"><i class="fa fa-caret-right"></i> Sách quản lý</a></li>
+                                        <li><a href="/sach/english-/ct871/p1"><i class="fa fa-caret-right"></i> Sách học Tiếng Anh</a></li>
+                                        <li><a href="/vat-dung-gia-dinh/du-lich-phuot/ct664/p1"><i class="fa fa-caret-right"><span class="sp"> Du lịch, phượt</span></i></a></li>
+                                        <li><a href="/nha-san-xuat/LEGO/ct6id180/p1"><i class="fa fa-caret-right"></i> Game Lego</a></li>
+                                        <li><a href="/van-phong-pham/so-tay/ct117/p1"><i class="fa fa-caret-right"></i> Sổ tay</a></li>
+                                        <li><a href="/vat-dung-gia-dinh/tui-the-thao/ct896/p1"><i class="fa fa-caret-right"></i> Túi thể thao</a></li>
+                                        <li><a href="/vat-dung-gia-dinh/do-dung-ca-nhan/ct802/p1"><i class="fa fa-caret-right"></i> Bóp, ví</a></li>
+                                        <li><a href="/cong-nghe/wacom/ct497/p1"><i class="fa fa-caret-right"></i> Bảng vẽ Wacom</a></li>
+                                        <li><a href="/sach/14095/quang-ganh-lo-di-va-vui-song-ban-moi-2012-%28bia-mem%29.html"><i class="fa fa-caret-right"></i> Quẳng gánh lo đi và vui sống</a></li>
+                                        <li><a href="/qua-tang/thu-bong-do-choi-vai/ct727/p1"><i class="fa fa-caret-right"></i> Gấu bông</a></li>
+                                        <li><a href="/qua-tang/dong-ho-tranh/ct846/p1"><i class="fa fa-caret-right"></i> Đồng hồ tranh</a></li>
+                                        <li><a href="/qua-tang/qua-tang-cho-be/ct386/p1"><i class="fa fa-caret-right"></i> Đồ chơi an toàn</a></li>
+                                        <li><a href="/qua-tang/khan-choang/ct748/p1"><i class="fa fa-caret-right"></i> Khăn quàng cổ</a></li>
+                                        <li><a href="/vat-dung-gia-dinh/ghe-luoi/ct839/p1"><i class="fa fa-caret-right"><span class="sp"> Ghế lười</span></i></a></li>
+                                        <li><a href="/tac-gia/nguyen-nhat-anh-auth532/p1"><i class="fa fa-caret-right"></i> Truyện Nguyễn Nhật Ánh</a></li>
+                                        <li><a href="/sach/kinh-di-gia-tuong-trinh-tham/ct567/p1"><i class="fa fa-caret-right"></i> Truyện trinh thám</a></li>
+                                        <li><a href="http://cmavn.org/truyen-tranh/khoa-hoc-ve-truyen-tranh-chuyen-nghiep"><i class="fa fa-caret-right"></i>Hoc ve</a></li>
+                                        <li><a href="/vat-dung-gia-dinh/du-lich-phuot/ct664/p1"><i class="fa fa-caret-right"></i> Do phuot</a></li>
+                                        <li><a href="http://cmavn.org/hoat-hinh/khoa-hoc-lam-phim-hoat-hinh-3d-chuyen-nghiep"><i class="fa fa-caret-right"></i> Phim hoat hinh 3D</a></li>
+                                        <li><a href="/vat-dung-gia-dinh/qua-luu-niem/ct387/p1"><i class="fa fa-caret-right"></i> Qua luu niem</a></li>
+                                        <li><a href="http://cmavn.org/hoat-hinh/khoa-hoc-lam-phim-hoat-hinh-2d-animation-artist"><i class="fa fa-caret-right"></i> Phim hoat hinh 2D</a></li>
+                                        <li><a href="http://cmavn.org/game/khoa-hoc-chuyen-vien-thiet-ke-game-dinh-cao-game-artist"><i class="fa fa-caret-right"></i> Thiet ke game</a></li>
+                                        <li><a href="/sach/song-dep/ct50/p1"><i class="fa fa-caret-right"></i> Qua tang cuoc song</a></li>
+                                        <li><a href="/sach/english-/ct871/p1"><i class="fa fa-caret-right"></i> Tai lieu tieng anh</a></li>
+                                        <li><a href="/bo-suu-tap/hat-giong-tam-hon/22970/p1"><i class="fa fa-caret-right"></i> Qua tang cuoc song</a></li>
+                                        <li><a href="/qua-tang/qua-tang-cho-nu/ct385/p1"><i class="fa fa-caret-right"></i> Qua 8/3</a></li>
+                                        <li><a href="/qua-tang.html"><i class="fa fa-caret-right"></i> Qua sinh nhat</a></li>
+                                        <li><a href="/sach.html"><i class="fa fa-caret-right"></i> Sinh nhat</a></li>
+                                        <li><a href="/sach/truyen-ngon-tinh/ct861/p1"><i class="fa fa-caret-right"></i> Truyen ngon tinh</a></li>
+                                        <li><a href="/sach/dam-my/ct860/p1"><i class="fa fa-caret-right"></i> Truyen dam my</a></li>
+                                        <li><a href="/tac-gia/marc-levy-auth3721/p1"><i class="fa fa-caret-right"></i> Marc Levy</a></li>
+                                        <li><a href="/sach/tieu-thuyet/ct278/p1"><i class="fa fa-caret-right"></i> Tieu thuyet tình cam</a></li>
+                                        <li><a href="/sach/kinh-te/ct62/p1"><i class="fa fa-caret-right"></i> Kinh te</a></li>
+                                        <li><a href="/sach/ky-nang-song/ct585/p1"><i class="fa fa-caret-right"></i> Ky nang song</a></li>
+                                        <li><a href="/sach/tu-vi-chiem-tinh/ct889/p1"><i class="fa fa-caret-right"></i> Tu vi</a></li>
+                                        <li><a href="/sach/tieng-nhat/ct607/p1"><i class="fa fa-caret-right"></i> Hoc tieng nhat</a></li>
+                                        <li><a href="/vat-dung-gia-dinh/balo/ct739/p1"><i class="fa fa-caret-right"></i> Balo</a></li>
+                                        <li><a href="/truyen-tranh.html"><i class="fa fa-caret-right"></i> Truyen tranh</a></li>
+                                        <li><a href="/van-phong-pham/40645/but-chi-mau-nuoc-raffine-marco-36-mau-hop-thiec-7120-36tn.html "> <i class="fa fa-caret-right"></i> Chi Mau Marco</a></li>
     
                                     </ul>
     

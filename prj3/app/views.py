@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from .models import Product, Publisher, Category
 from django.views.generic.detail import DetailView
 from cart.cart import Cart
-
+import random
 
 # Create your views here.
 
@@ -97,10 +97,21 @@ def productdetail(request,slug):
     product = get_object_or_404(Product, slug=slug)
     cart = Cart(request)
 
+ 
+    related_products = list(product.category.products.filter(parent=None).exclude(id=product.id))
+    
+    if (len(related_products) >= 3):
+        related_products = random.sample(related_products, 3)
+    
+    if product.parent:
+        return redirect('product_detail', category_slug=category_slug, slug=product.parent.slug)
+
+
     if product.discount > 0:
         priceDiscount = product.price_sell * ((100-product.discount)/100)
     else:
         priceDiscount = product.price_sell
+    
     if not product.thumbnail:
         imagesstring = "{'image': '%s'}," % (product.image.url) 
     else:
@@ -123,6 +134,8 @@ def productdetail(request,slug):
         'cart': cart,
         'priceDiscount': priceDiscount,
         'imagesstring': imagesstring,
+        'related_products': related_products,
+        
     }
 
     return render(request, 'productdetail.html', context)

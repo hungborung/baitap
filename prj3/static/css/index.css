@@ -41,15 +41,13 @@ display: block;
 width: 200px;
 height: 200px;
 position: relative;
-
 }
 .img-container img{
-margin: 0;
-position: absolute;
-top: 50%;
-left: 50%;
-
-transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .row ul{
 list-style: none;
