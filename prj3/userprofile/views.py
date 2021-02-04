@@ -26,4 +26,12 @@ def signup(request):
 
 @login_required
 def account(request):
-    return render(request, 'account.html')
+    return render(request, 'profile/general.html')
+
+@login_required
+def userorder(request):
+    return render(request, 'profile/userorder.html')
+    
+@login_required
+def notification(request):
+    return render(request, 'profile/notification.html')

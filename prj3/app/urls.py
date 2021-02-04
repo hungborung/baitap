@@ -6,7 +6,7 @@ from cart.webhook import webhook
 from coupon.api import api_can_use
 from userprofile.views import signup
 from django.contrib.auth import views
-from userprofile.views import account
+from userprofile.views import account, userorder, notification
 
 urlpatterns = [
     path('', index, name='home'),
@@ -17,6 +17,8 @@ urlpatterns = [
     path('hooks/', webhook, name="webhook"),
     path('product-page/', search, name='search'),
     path('account/', account, name='account'),
+    path('userorder/', userorder, name='userorder'),
+    path('notification/', notification, name='notification'),
     path('help/', help, name='help'),
     
     #auth

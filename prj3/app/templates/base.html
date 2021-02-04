@@ -484,11 +484,11 @@
     </div>
     
 
-   
+    {% if recently_viewed_products %}
     <div id="mySidenav" class="sidenav">
         <div class="row" style="padding: 10px;">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            {% for r in recently_viewd_products %}
+            {% for r in recently_viewed_products %}
                 <div class="col-md-6 item">
                     <div class='item-container'>
                         <a href="{% url 'productdetail' r.slug %}" class='product-item' style="text-decoration: None; color: black;">
@@ -513,11 +513,19 @@
                 </div>
             {% endfor %}
         </div>
+        
     </div>
+    
     <div class="product-recently">
         <span style="font-size: 20px;cursor:pointer" onclick="openNav()" class="navbar">&#9776; sản phẩm đã xem</span>
     </div>
-      
+    {% else %}
+        <div class="product-recently" hidden>
+           
+        </div>
+    {% endif %}
+
+
     {% endblock %}
 
     <script>

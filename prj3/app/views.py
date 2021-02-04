@@ -24,7 +24,7 @@ def index(request):
     orders = OrderItem.objects.all()
     
     popular_products = Product.objects.all().order_by('-num_visits')[0:5]
-    recently_viewd_products = Product.objects.all().order_by('-last_visit')[0:10]
+    recently_viewed_products = Product.objects.all().order_by('-last_visit')[0:10]
 
     counts = {}
     for o in orders:
@@ -35,7 +35,7 @@ def index(request):
         'listCategory' : listCategory,
         'cart': cart,
         'popular_products': popular_products,
-        'recently_viewd_products': recently_viewd_products
+        'recently_viewed_products': recently_viewed_products
     }
     return render(request, 'index.html', context)
 
