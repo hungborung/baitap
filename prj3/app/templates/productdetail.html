@@ -21,8 +21,10 @@
       <nav class="breadcrumb-bar" aria-label="breadcrumbs">
         <ul class="breadcrumb" style="background-color: #F0F0F0; font-size: 15px; margin-bottom: 0px;">
           <li class="breadcrumb-item"><a href="{% url 'home' %}">Trang chủ</a></li>
-         {% if product.category.cat_parent %}
+          {% if product.category.cat_parent %}
           <li class="breadcrumb-item"><a href="">{{ product.category.cat_parent.name }}</a></li>
+          <li class="breadcrumb-item"><a href="">{{ product.category.name }}</a></li>
+          {% elif product.category %}
             <li class="breadcrumb-item"><a href="">{{ product.category.name }}</a></li>
           {% endif %}
           <li class="active breadcrumb-item" aria-current="page"><a href="">{{ product.name }}</a></li> 

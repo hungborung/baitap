@@ -9,7 +9,7 @@ def cart_detail(request):
     for item in cart:
         product = item['product']
         url = '/%s/%s/' %('product', product.slug)
-        b = "{'id': '%s', 'title': '%s', 'price': '%s', 'quantity': '%s', 'total_price': '%s', 'image': '%s', 'url': '%s', 'num_available': '%s',}," % (product.id, product.name, product.price_sell, item['quantity'], item['total_price'], product.image.url, url, product.num_available )
+        b = "{'id': '%s', 'title': '%s', 'price': '%s', 'quantity': '%s', 'total_price': '%s', 'image': '%s', 'url': '%s', 'num_available': '%s',}," % (product.id, product.name, product.price_sell, item['quantity'], item['total_price'], product.get_thumbnail, url, product.num_available )
         productsstring = productsstring + b
 
     if request.user.is_authenticated:

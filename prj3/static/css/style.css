@@ -169,9 +169,7 @@ body{
     background-color: #F0F0F0;
 }
 
-.img-container{
-    text-align: center;
-}
+
 
 .ul-main ul li a{
     text-decoration: none;
@@ -190,3 +188,4 @@ a:hover {
 li{
     list-style-type: none;
 }
+

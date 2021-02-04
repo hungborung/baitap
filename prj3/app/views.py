@@ -3,8 +3,11 @@ from django.shortcuts import redirect
 from .models import Product, Publisher, Category
 from django.views.generic.detail import DetailView
 from cart.cart import Cart
+from order.models import Order, OrderItem
 import random
-
+from heapq import nlargest
+import heapq
+from datetime import datetime
 # Create your views here.
 
 priceList = [
@@ -17,14 +20,22 @@ def index(request):
     product = Product.objects.filter(is_featured=True)
     listCategory = Category.objects.filter(cat_parent=None)
     cart = Cart(request)
-   
+
+    orders = OrderItem.objects.all()
     
+    popular_products = Product.objects.all().order_by('-num_visits')[0:5]
+    recently_viewd_products = Product.objects.all().order_by('-last_visit')[0:10]
+
+    counts = {}
+    for o in orders:
+        pro, qty = o.product, o.quantity
+        counts[pro] = counts.get(pro, 0) + qty
     context = {
         'product' : product,
         'listCategory' : listCategory,
         'cart': cart,
-
-      
+        'popular_products': popular_products,
+        'recently_viewd_products': recently_viewd_products
     }
     return render(request, 'index.html', context)
 
@@ -46,6 +57,9 @@ def search(request):
         products = products.filter(price_sell__gte=minPrice)
     if maxPrice:
         products = products.filter(price_sell__lte=maxPrice)
+
+
+    
     context = {
         'query': query,
         'products': products,
@@ -127,6 +141,13 @@ def productdetail(request,slug):
         product.in_cart = True
     else:
         product.in_cart = False
+
+
+    
+    product.num_visits = product.num_visits + 1
+    product.last_visit = datetime.now()
+    product.save()
+
 
 
     context = {

@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 
-
+{% with page=1 %}
+   {{ block.super }}
+ {% endwith %}  
 {% block content %} 
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<link rel="stylesheet" href="{% static 'owlcarousel/assets/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'owlcarousel/assets/owl.theme.default.min.css' %}">
+
+<script src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'owlcarousel/owl.carousel.js' %}"></script>
+
+<script src="{% static 'js/index.js' %}"></script>
 
 <div class="container">
     <div class="row custom-menu-homepage">
@@ -86,14 +96,13 @@
         </div>
     </div>
     <div class="main-content">
-        <div class="title" style="font-weight: bold; color: #f7941e; font-size: 25px;">
+        <div class="title" style="font-weight: bold; color: #f7941e; font-size: 22px; margin-top: 30px;">
             Sản phẩm nổi bật
         </div>
         <div class="row">
-            <ul class="bxslider">
+            <div class="owl-carousel owl-theme">
                 {% for p in product %}
-                <li class="list-item col-md-3 mt-3">
-                    <div class='item-container' style="position: relative;">
+                    <div class="item">
                         <a href="{% url 'productdetail' p.slug %}" class='product-item' style="text-decoration: None; color: black;">
                             <div class="img-container" style="text-align: center;">
                                 <img src="{{p.image.url}}" class='product-image clearfix'>
@@ -113,9 +122,41 @@
                             </div>
                         </a>
                     </div>
-                </li>
-                {% endfor %}
-            </ul>
+                 {% endfor %}
+               
+            </div>
+            
+        </div>
+        <div class="title" style="font-weight: bold; color: #f7941e; font-size: 22px; margin-top: 30px;">
+            Sản phẩm phổ biến
+        </div>
+        <div class="row">
+            <div class="owl-carousel owl-theme popular-product">
+                {% for p in popular_products %}
+                    <div class="item">
+                        <a href="{% url 'productdetail' p.slug %}" class='product-item' style="text-decoration: None; color: black;">
+                            <div class="img-container" style="text-align: center;">
+                                <img src="{{p.image.url}}" class='product-image clearfix'>
+                            </div>
+                            <div class="item-info">
+                                <div class='product-name'>
+                                    <span >{{p.name}}</span>
+                                </div>
+                                <div>
+                                    {% if p.discount > 0 %}
+                                        <span id="price_discount" style="color: #f7941e; font-size: 20px; font-weight: bold;">{{ p.price_discount }}</span>
+                                        <del class='price'>{{p.price_sell}}₫</del>
+                                    {% else %}
+                                        <span class='price'>{{p.price_sell}}₫</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                 {% endfor %}
+               
+            </div>
+            
         </div>
     </div>
     

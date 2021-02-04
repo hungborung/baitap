@@ -33,38 +33,94 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-        li{
-            list-style: none;
+    .product-recently{
+        position: fixed;
+        right: 0;
+        top: 50%;
+        width: 100px;
+    }
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        background-color: white;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 40px;
 
-        }
-        a:link {
-            text-decoration: none;
-        }
-        a:visited {
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: none;  
-        }
-        .h-links ul li ul li{
-            padding-right: 15px;
-        }
-        .h-links ul li ul li a{
-            font-size: 15px;
-            color: #333;
-        }
-        a{
-            color: #333;
-        }
-        .ul-main li p{
-            color: #333;
-            font-weight: bold;
-        }
-        .ul-main ul li{
-            font-size: 15px;
-            display:inline-block;
-        }
-        .
+        box-shadow: 0 0 10px 2px #6c6c78;   
+    }
+    .img-container{
+        height: 200px;
+        position: relative;
+        padding-left: 0px;
+        border: 1px solid #dee2e6;
+    }
+    .item:hover{
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+    }
+    .img-container img{
+        width: 80%;
+    }
+    .item{
+        margin-bottom: 20px;
+    }
+   
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    #main {
+    transition: margin-left .5s;
+    padding: 16px;
+    }
+
+    @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+    }
+
+
+    li{
+        list-style: none;
+
+    }
+    a:link {
+        text-decoration: none;
+    }
+    a:visited {
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: none;  
+    }
+    .h-links ul li ul li{
+        padding-right: 15px;
+    }
+    .h-links ul li ul li a{
+        font-size: 15px;
+        color: #333;
+    }
+    a{
+        color: #333;
+    }
+    .ul-main li p{
+        color: #333;
+        font-weight: bold;
+    }
+    .ul-main ul li{
+        font-size: 15px;
+        display:inline-block;
+    }
+    
     </style>
 </head>
 
@@ -76,7 +132,7 @@
                 <div class="container clearfix navbar-default">
                     <div class="main-box">
                         <div class="row">
-                            <div class="left-header clearfix">
+                            <div class="left-header clearfix col-md-4">
                                 <ul class="left">
                                     <li class=""> 
                                         <a href="{% url 'help' %}">
@@ -98,8 +154,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="right-header clearfix">
-                                <ul class="right">
+                            <div class="right-header clearfix col-md-8" >
+                                <ul class="right" style="float: right;">
                                     <li class="">
                                         <a href="">
                                             <i class="fa fa-gift"></i>
@@ -176,14 +232,15 @@
     </div>
     {% endblock %}
     <div class="main-content clearfix">
-        {% block content %}
+    {% block content %}
+
     {% endblock %}  
 
     </div>
     {% block footer %}
-    <div class="footer container pt-5">
+    <div class="footer container mt-5">
         <div class="name">
-            <h4>NHÀ SÁCH TRỰC TUYẾN BOOKBUY.VN</h4>
+            <h5>NHÀ SÁCH TRỰC TUYẾN BOOKBUY.VN</h5>
         </div>
         <div id="bb-footer">
             <div class="f-below">
@@ -357,7 +414,7 @@
                                 </ul>
                             </div>
     
-                            <div class="social-networks">
+                            <div class="social-networks" style="float: right;">
                                 <ul>
                                     <li class="li-first">
                                         Làm bạn với BookBuy :
@@ -400,33 +457,78 @@
                 </div>
     
             </div>
-            <div class="newsletter-toggle active hidden-xs">
-    
-    <form action="/BookBuy/RegisterLetter" data-ajax="true" data-ajax-failure="EmailRegisterToggleFailure" data-ajax-success="EmailRegisterToggleSuccess" id="emailletter-toggle" method="post">                
-        <h4 class="header-newsletter-toggle">
-                        <span>Đăng ký nhận bản tin từ Bookbuy</span>
-                        <a class="toggle">
-                            <i class="fa fa-angle-down"></i>
-                            <i class="fa fa-envelope-o"></i>
-                        </a>
-                    </h4>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="EmailLetter" required="" id="emaillettertoggle" placeholder="Email của bạn" />
-                        <span class="toggle-error"></span>
-                        <span class="toggle-success"></span>
-                        <input type="hidden" id="sexIdToggle" name="sexId" />
-                        <ul class="action-submit">
-                            <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="1">NAM</a></li>
-                            <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="0">NỮ</a></li>
-                            <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="2">LGBT</a></li>
-                        </ul>
-                        
-                    </div>
-    </form>
+            <div class="newsletter-toggle active hidden-xs">  
+                <form action="/BookBuy/RegisterLetter" data-ajax="true" data-ajax-failure="EmailRegisterToggleFailure" data-ajax-success="EmailRegisterToggleSuccess" id="emailletter-toggle" method="post">                
+                    <h4 class="header-newsletter-toggle">
+                                    <span>Đăng ký nhận bản tin từ Bookbuy</span>
+                                    <a class="toggle">
+                                        <i class="fa fa-angle-down"></i>
+                                        <i class="fa fa-envelope-o"></i>
+                                    </a>
+                                </h4>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="EmailLetter" required="" id="emaillettertoggle" placeholder="Email của bạn" />
+                                    <span class="toggle-error"></span>
+                                    <span class="toggle-success"></span>
+                                    <input type="hidden" id="sexIdToggle" name="sexId" />
+                                    <ul class="action-submit">
+                                        <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="1">NAM</a></li>
+                                        <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="0">NỮ</a></li>
+                                        <li><a href="javacript:void(0)" class="submit-letter-toggle" data-gender="2">LGBT</a></li>
+                                    </ul>
+                                    
+                                </div>
+                </form>
+            </div>
+        </div>
     </div>
+    
+
+   
+    <div id="mySidenav" class="sidenav">
+        <div class="row" style="padding: 10px;">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            {% for r in recently_viewd_products %}
+                <div class="col-md-6 item">
+                    <div class='item-container'>
+                        <a href="{% url 'productdetail' r.slug %}" class='product-item' style="text-decoration: None; color: black;">
+                            <div class="img-container" style="width: 166.5px">
+                                <img src="{{ r.image.url}}" class='product-thumbnail clearfix'>
+                            </div>
+                            <div class="item-info">
+                                <div class='product-name'>
+                                    <span >{{ r.name}}</span>
+                                </div>
+                                <div>
+                                    {% if r.discount > 0 %}
+                                        <span id="price_discount" style="color: #f7941e; font-size: 20px; font-weight: bold;">{{ r.price_discount }}</span>
+                                        <del class='price'>{{ r.price_sell}}₫</del>
+                                    {% else %}
+                                        <span class='price'>{{ r.price_sell}}₫</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="product-recently">
+        <span style="font-size: 20px;cursor:pointer" onclick="openNav()" class="navbar">&#9776; sản phẩm đã xem</span>
+    </div>
+      
     {% endblock %}
 
-    
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "400px";
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
     <script>
         
         var store = new Vuex.Store({
